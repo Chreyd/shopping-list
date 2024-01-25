@@ -11,8 +11,9 @@ export default function App() {
 
   const submitHandler = () => {
     // setMyProducts([...myProducts, product])
-    setMyProducts((currentMyProducts) => [...currentMyProducts, product]);
-    console.log(myProducts);
+    product
+      ? setMyProducts((currentMyProducts) => [...currentMyProducts, product])
+      : "";
     setProduct("");
   };
   return (
@@ -26,6 +27,13 @@ export default function App() {
           value={product}
         />
         <Button title="Valider" onPress={submitHandler} />
+      </View>
+      <View style={styles.items}>
+        {myProducts.map((item, index) => (
+          <Text style={styles.element} key={index}>
+            {item}
+          </Text>
+        ))}
       </View>
     </View>
   );
@@ -46,5 +54,14 @@ const styles = StyleSheet.create({
     paddingLeft: 9,
     fontSize: 18,
     flexGrow: 1,
+  },
+  items: {
+    marginTop: 10,
+  },
+  element: {
+    backgroundColor: "#ffb6c1",
+    marginVertical: 5,
+    padding: 20,
+    fontSize: 17,
   },
 });
