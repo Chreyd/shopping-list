@@ -10,7 +10,10 @@ export default function App() {
   };
 
   const submitHandler = () => {
-    console.log(product);
+    // setMyProducts([...myProducts, product])
+    setMyProducts((currentMyProducts) => [...currentMyProducts, product]);
+    console.log(myProducts);
+    setProduct("");
   };
   return (
     <View style={styles.container}>
