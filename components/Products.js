@@ -1,11 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import React from "react";
 
 export default function Products(props) {
+  /* 
+    TouchableWithoutFeedback ne peut pas être stylisé et est souvent utilisé pour 
+    appliquer un onpress... afin d'exécuter un évenement sur l'élément sur lequel on clique
+    */
   return (
-    <View style={styles.items}>
-      <Text style={styles.element}>{props.name}</Text>
-    </View>
+    <TouchableWithoutFeedback onPress={() => console.log("first")}>
+      <View style={styles.items}>
+        <Text style={styles.element}>{props.name}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

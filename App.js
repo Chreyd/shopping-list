@@ -11,10 +11,7 @@ import {
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 
-/* 
-  inviquer une fonction dans le composant enfant pour y 
-  passer la valeur du state
-*/
+
 
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
