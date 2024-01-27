@@ -8,19 +8,25 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
+import Products from "./components/Products";
 
 export default function App() {
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState("");
   const [myProducts, setMyProducts] = useState([]);
+
+  console.log(myProducts);
 
   const inputHandler = (val) => {
     setProduct(val);
   };
 
   const submitHandler = () => {
-    const idString=Date.now().toString();
+    const idString = Date.now().toString();
     product
-      ? setMyProducts((currentMyProducts) => [{key: idString, name: product},...currentMyProducts])
+      ? setMyProducts((currentMyProducts) => [
+          { key: idString, name: product },
+          ...currentMyProducts,
+        ])
       : "";
     setProduct("");
   };
@@ -36,12 +42,7 @@ export default function App() {
         />
         <Button title="Valider" onPress={submitHandler} />
       </View>
-      <FlatList
-        data={myProducts}
-        renderItem={({ item }) => 
-          <Text style={styles.element}>{item.name}</Text>
-        }
-      />
+      <FlatList data={myProducts} renderItem={({ item }) => <Products name={item.name}/>} />
       {/*       <ScrollView>
         <View style={styles.items}>
           {myProducts.map((item, index) => (
@@ -71,14 +72,5 @@ const styles = StyleSheet.create({
     paddingLeft: 9,
     fontSize: 18,
     flexGrow: 1,
-  },
-  items: {
-    marginVertical: 10,
-  },
-  element: {
-    backgroundColor: "#ffb6c1",
-    marginVertical: 5,
-    padding: 20,
-    fontSize: 17,
   },
 });
