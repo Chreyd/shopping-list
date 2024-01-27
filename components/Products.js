@@ -1,12 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 export default function Products(props) {

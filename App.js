@@ -9,18 +9,16 @@ import {
   FlatList,
 } from "react-native";
 import Products from "./components/Products";
+import AddProduct from "./components/AddProduct";
 
 export default function App() {
-  const [product, setProduct] = useState("");
   const [myProducts, setMyProducts] = useState([]);
 
   console.log(myProducts);
 
-  const inputHandler = (val) => {
-    setProduct(val);
-  };
 
-  const submitHandler = () => {
+
+  const submitHandler = (product) => {
     const idString = Date.now().toString();
     product
       ? setMyProducts((currentMyProducts) => [
@@ -28,21 +26,22 @@ export default function App() {
           ...currentMyProducts,
         ])
       : "";
+    // setProduct("");
+
+/*     setMyProducts((currentMyProducts) => [
+      { key: idString, name: product },
+      ...currentMyProducts,
+    ])
     setProduct("");
+    */
   };
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Nouveau Produit"
-          // onChangeText={(e)=>inputHandler(e)}
-          onChangeText={inputHandler}
-          value={product}
-        />
-        <Button title="Valider" onPress={submitHandler} />
-      </View>
-      <FlatList data={myProducts} renderItem={({ item }) => <Products name={item.name}/>} />
+      <AddProduct submitHandler={submitHandler} />
+      <FlatList
+        data={myProducts}
+        renderItem={({ item }) => <Products name={item.name} />}
+      />
       {/*       <ScrollView>
         <View style={styles.items}>
           {myProducts.map((item, index) => (
