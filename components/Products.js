@@ -1,14 +1,24 @@
-import { StyleSheet, Text, TouchableWithoutFeedback, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  TouchableOpacity,
+  TouchableHighlight,
+} from "react-native";
 import React from "react";
 
 export default function Products(props) {
-
   return (
-    <TouchableOpacity onPress={() => console.log(props.name)} activeOpacity={0.8}>
+    <TouchableHighlight
+      onPress={() => console.log(props.name)}
+      activeOpacity={0.8}
+      underlayColor={"yellow"}
+    >
       <View style={styles.items}>
         <Text style={styles.element}>{props.name}</Text>
       </View>
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 }
 
