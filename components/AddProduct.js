@@ -9,6 +9,12 @@ export default function AddProduct(props) {
     setProduct(val);
   };
 
+  const handleClick=()=>{
+    props.submitHandler(product);
+    setProduct("");
+
+  }
+
   return (
     <View>
       <View style={styles.inputContainer}>
@@ -19,7 +25,7 @@ export default function AddProduct(props) {
           onChangeText={inputHandler}
           value={product}
         />
-        <Button title="Valider" onPress={()=> props.submitHandler(product, setProduct)} />
+        <Button title="Valider" onPress={handleClick} />
       </View>
     </View>
   );

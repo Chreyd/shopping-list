@@ -11,14 +11,15 @@ import {
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 
+/* 
+  inviquer une fonction dans le composant enfant pour y 
+  passer la valeur du state
+*/
+
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
 
-  console.log(myProducts);
-
-
-
-  const submitHandler = (product, setProduct) => {
+  const submitHandler = (product) => {
     const idString = Date.now().toString();
     product
       ? setMyProducts((currentMyProducts) => [
@@ -26,14 +27,6 @@ export default function App() {
           ...currentMyProducts,
         ])
       : "";
-    setProduct("");
-
-/*     setMyProducts((currentMyProducts) => [
-      { key: idString, name: product },
-      ...currentMyProducts,
-    ])
-    setProduct("");
-    */
   };
   return (
     <View style={styles.container}>
@@ -42,15 +35,6 @@ export default function App() {
         data={myProducts}
         renderItem={({ item }) => <Products name={item.name} />}
       />
-      {/*       <ScrollView>
-        <View style={styles.items}>
-          {myProducts.map((item, index) => (
-            <Text style={styles.element} key={index}>
-              {item}
-            </Text>
-          ))}
-        </View>
-      </ScrollView> */}
     </View>
   );
 }
