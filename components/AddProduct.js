@@ -19,7 +19,7 @@ export default function AddProduct(props) {
           onChangeText={inputHandler}
           value={product}
         />
-        <Button title="Valider" onPress={()=>{ props.submitHandler(product) ;setProduct("")}} />
+        <Button title="Valider" onPress={()=> props.submitHandler(product, setProduct)} />
       </View>
     </View>
   );

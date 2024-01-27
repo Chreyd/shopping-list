@@ -18,7 +18,7 @@ export default function App() {
 
 
 
-  const submitHandler = (product) => {
+  const submitHandler = (product, setProduct) => {
     const idString = Date.now().toString();
     product
       ? setMyProducts((currentMyProducts) => [
@@ -26,7 +26,7 @@ export default function App() {
           ...currentMyProducts,
         ])
       : "";
-    // setProduct("");
+    setProduct("");
 
 /*     setMyProducts((currentMyProducts) => [
       { key: idString, name: product },
