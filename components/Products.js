@@ -8,35 +8,38 @@ import {
   Pressable,
 } from "react-native";
 import React from "react";
+import TrashCan from "./TrashCan";
 
 export default function Products(props) {
   return (
-    <Pressable
-        // onLongPress={() => console.log(props.name)}
-      onPress={() => console.log(props.name)}
-/*       style={({pressed}) => [
-        {
-          backgroundColor: pressed ? "red" : "blue",
-        },
-      ]} */
-      android_ripple={{color: "#00F"}}
-    //   delayLongPress={2000}
-    >
+    <View style={styles.products} >
       <View style={styles.items}>
         <Text style={styles.element}>{props.name}</Text>
       </View>
-    </Pressable>
+      <Pressable onPress={() => props.deleteProduct(props.keyProduct)}>
+        <View>
+          <TrashCan />
+        </View>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+    products:{
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
   items: {
     marginVertical: 5,
+    flexGrow:1
   },
   element: {
-    backgroundColor: "#ffb6c1",
+    backgroundColor: "#00ffff",
     marginVertical: 5,
     padding: 20,
     fontSize: 17,
+    marginRight: 5,
   },
+
 });
