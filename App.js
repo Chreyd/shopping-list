@@ -4,7 +4,6 @@ import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 
 export default function App() {
-
   const [myProducts, setMyProducts] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +15,7 @@ export default function App() {
           { key: idString, name: product },
           ...currentMyProducts,
         ])
-      : setShowModal(true)
+      : setShowModal(true);
   };
 
   const deleteProduct = (key) => {
@@ -26,8 +25,14 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
-      <Modal visible={showModal} onRequestClose={()=>setShowModal(false)}>
-        <Text>Hello Word</Text>
+      <Modal visible={showModal} onRequestClose={() => setShowModal(false)}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text>Hello</Text>
+            </View>
+          </View>
+        </View>
       </Modal>
 
       <AddProduct submitHandler={submitHandler} />
@@ -62,4 +67,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
     flexGrow: 1,
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.2)",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    width: "80%",
+    height: 250,
+    borderRadius: 15,
+    alignItems: "center",
+  },
+  modalHeader:{
+    // backgroundColor: "green",
+    width: '100%',
+    padding: 16,
+    alignItems: "center",
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    borderBottomWidth : 1,
+    borderBottomColor: 'lightgray'
+  }
 });
