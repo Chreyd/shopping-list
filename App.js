@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, View, FlatList, Alert, Modal, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Alert,
+  Modal,
+  Text,
+  Pressable,
+} from "react-native";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 
@@ -32,7 +40,16 @@ export default function App() {
               <Text style={styles.modalHeaderText}>OUPS!</Text>
             </View>
             <View style={styles.modalBody}>
-              <Text style={styles.modalBodyText}>Merci d'indiquer plus d'un caractère</Text>
+              <Text style={styles.modalBodyText}>
+                Merci d'indiquer plus d'un caractère
+              </Text>
+            </View>
+            <View style={styles.modalFooter}>
+              <Pressable style={styles.pressableBtnModal}
+              onPress={()=>setShowModal(false)}
+              >
+                <Text style={styles.modalBtnText}>OK</Text>
+              </Pressable>
             </View>
           </View>
         </View>
@@ -94,18 +111,36 @@ const styles = StyleSheet.create({
     borderBottomColor: "lightgray",
   },
   modalHeaderText: {
-    color: 'grey',
+    color: "grey",
   },
-  modalBody:{
+  modalBody: {
     // backgroundColor:'red',
     flex: 1,
-    width: '100%',
+    width: "100%",
     justifyContent: "center",
-    alignItems: 'center',
+    alignItems: "center",
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
   },
-  modalBodyText:{
+  modalBodyText: {
     fontSize: 17,
+    // color: "grey",
+  },
+  modalFooter: {
+    width: "100%",
+
+  },
+  pressableBtnModal: {
+    // padding: 10,
+    backgroundColor: "lightseagreen",
+    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 15,
+    // alignItems:'center'
+  },
+  modalBtnText:{
+    color: '#fff',
+    fontSize: 17,
+    textAlign: 'center', 
+    padding: 16,
   }
 });
