@@ -26,6 +26,8 @@ export default function App() {
       : setShowModal(true);
   };
 
+  /* animationType: fade ou slide */
+
   const deleteProduct = (key) => {
     setMyProducts((currentMyProducts) => {
       return currentMyProducts.filter((product) => product.key != key);
@@ -33,7 +35,7 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
-      <Modal visible={showModal} onRequestClose={() => setShowModal(false)}>
+      <Modal visible={showModal} onRequestClose={() => setShowModal(false)} animationType="fade" transparent>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
@@ -45,8 +47,9 @@ export default function App() {
               </Text>
             </View>
             <View style={styles.modalFooter}>
-              <Pressable style={styles.pressableBtnModal}
-              onPress={()=>setShowModal(false)}
+              <Pressable
+                style={styles.pressableBtnModal}
+                onPress={() => setShowModal(false)}
               >
                 <Text style={styles.modalBtnText}>OK</Text>
               </Pressable>
@@ -128,7 +131,6 @@ const styles = StyleSheet.create({
   },
   modalFooter: {
     width: "100%",
-
   },
   pressableBtnModal: {
     // padding: 10,
@@ -137,10 +139,10 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
     // alignItems:'center'
   },
-  modalBtnText:{
-    color: '#fff',
+  modalBtnText: {
+    color: "#fff",
     fontSize: 17,
-    textAlign: 'center', 
+    textAlign: "center",
     padding: 16,
-  }
+  },
 });
