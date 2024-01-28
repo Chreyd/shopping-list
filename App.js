@@ -7,6 +7,7 @@ import {
   Button,
   ScrollView,
   FlatList,
+  Alert,
 } from "react-native";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
@@ -16,13 +17,67 @@ export default function App() {
 
   const submitHandler = (product) => {
     const idString = Date.now().toString();
-    product.length>1
+    product.length > 1
       ? setMyProducts((currentMyProducts) => [
           { key: idString, name: product },
           ...currentMyProducts,
         ])
-      : alert("Produit invalide");
+      : Alert.alert("Désolé", "Article non valide", [
+          {
+            text: "Compris",
+            onPress: () => console.log("Alerte validé"),
+            style: "destructive",
+          },
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel",
+          },
+          {
+            text: "OK",
+            onPress: () => console.log("OK Pressed"),
+            style: "default",
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss:()=>{console.log("OK onDismiss")}
+        }
+        );
   };
+
+  /* 
+  ****************************
+  *  L'interface Alert       *    
+  * **************************
+  
+  export interface AlertStatic {
+  alert: (
+    title: string,
+    message?: string,
+    buttons?: AlertButton[],
+    options?: AlertOptions,
+  ) => void;
+  prompt: (
+    title: string,
+    message?: string,
+    callbackOrButtons?: ((text: string) => void) | AlertButton[],
+    type?: AlertType,
+    defaultValue?: string,
+    keyboardType?: string,
+    options?: AlertOptions,
+  ) => void;
+}*/
+
+  /*    Alert.alert(
+     'Alert Title',
+     'My Alert Msg',
+     [
+       {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+       {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+       {text: 'OK', onPress: () => console.log('OK Pressed')},
+     ]
+   ); */
 
   const deleteProduct = (key) => {
     setMyProducts((currentMyProducts) => {
@@ -35,7 +90,11 @@ export default function App() {
       <FlatList
         data={myProducts}
         renderItem={({ item }) => (
-          <Products name={item.name} deleteProduct={deleteProduct} keyProduct={item.key} />
+          <Products
+            name={item.name}
+            deleteProduct={deleteProduct}
+            keyProduct={item.key}
+          />
         )}
       />
     </View>
