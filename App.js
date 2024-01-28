@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,6 +15,18 @@ import AddProduct from "./components/AddProduct";
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
 
+  const [count, setCount] = useState(0);
+//   const [count, setCount] = useState([]);
+
+  useEffect(() => {
+/*     if (count > 3) {
+      setMyProducts([]);
+    } */
+   
+    count>3? (setMyProducts([])): ""
+    console.log(count)
+  }, [count])
+
   const submitHandler = (product) => {
     const idString = Date.now().toString();
     product.length > 1
@@ -22,62 +34,24 @@ export default function App() {
           { key: idString, name: product },
           ...currentMyProducts,
         ])
-      : Alert.alert("Désolé", "Article non valide", [
+      : Alert.alert(
+          "Désolé",
+          "Article non valide",
+          [
+            {
+              text: "Compris",
+              onPress: () => setCount(count + 1),
+              style: "destructive",
+            },
+          ],
           {
-            text: "Compris",
-            onPress: () => console.log("Alerte validé"),
-            style: "destructive",
-          },
-          {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel",
-          },
-          {
-            text: "OK",
-            onPress: () => console.log("OK Pressed"),
-            style: "default",
-          },
-        ],
-        {
-          cancelable: true,
-          onDismiss:()=>{console.log("OK onDismiss")}
-        }
+            cancelable: true,
+            onDismiss: () => {
+              console.log("OK onDismiss");
+            },
+          }
         );
   };
-
-  /* 
-  ****************************
-  *  L'interface Alert       *    
-  * **************************
-  
-  export interface AlertStatic {
-  alert: (
-    title: string,
-    message?: string,
-    buttons?: AlertButton[],
-    options?: AlertOptions,
-  ) => void;
-  prompt: (
-    title: string,
-    message?: string,
-    callbackOrButtons?: ((text: string) => void) | AlertButton[],
-    type?: AlertType,
-    defaultValue?: string,
-    keyboardType?: string,
-    options?: AlertOptions,
-  ) => void;
-}*/
-
-  /*    Alert.alert(
-     'Alert Title',
-     'My Alert Msg',
-     [
-       {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-       {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-       {text: 'OK', onPress: () => console.log('OK Pressed')},
-     ]
-   ); */
 
   const deleteProduct = (key) => {
     setMyProducts((currentMyProducts) => {
