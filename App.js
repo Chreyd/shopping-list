@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { StyleSheet, View, FlatList, Alert } from "react-native";
+import { StyleSheet, View, FlatList, Alert, Modal, Text } from "react-native";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 
 export default function App() {
+
   const [myProducts, setMyProducts] = useState([]);
+
+  const [showModal, setShowModal] = useState(false);
 
   const submitHandler = (product) => {
     const idString = Date.now().toString();
-    setMyProducts((currentMyProducts) => [
-      { key: idString, name: product },
-      ...currentMyProducts,
-    ]);
+    product.length > 1
+      ? setMyProducts((currentMyProducts) => [
+          { key: idString, name: product },
+          ...currentMyProducts,
+        ])
+      : setShowModal(true)
   };
 
   const deleteProduct = (key) => {
@@ -21,6 +26,10 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
+      <Modal visible={showModal} onRequestClose={()=>setShowModal(false)}>
+        <Text>Hello Word</Text>
+      </Modal>
+
       <AddProduct submitHandler={submitHandler} />
       <FlatList
         data={myProducts}
