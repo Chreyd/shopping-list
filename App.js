@@ -16,12 +16,12 @@ export default function App() {
 
   const submitHandler = (product) => {
     const idString = Date.now().toString();
-    product
+    product.length>1
       ? setMyProducts((currentMyProducts) => [
           { key: idString, name: product },
           ...currentMyProducts,
         ])
-      : "";
+      : alert("Produit invalide");
   };
 
   const deleteProduct = (key) => {
