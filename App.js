@@ -35,7 +35,7 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
-      <Modal visible={showModal} onRequestClose={() => setShowModal(false)} animationType="fade" transparent>
+      <Modal visible={showModal} onRequestClose={() => setShowModal(false)} animationType="slide" transparent>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
