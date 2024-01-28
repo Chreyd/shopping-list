@@ -5,20 +5,27 @@ import {
   View,
   TouchableOpacity,
   TouchableHighlight,
+  Pressable,
 } from "react-native";
 import React from "react";
 
 export default function Products(props) {
   return (
-    <TouchableHighlight
+    <Pressable
+        // onLongPress={() => console.log(props.name)}
       onPress={() => console.log(props.name)}
-      activeOpacity={0.8}
-      underlayColor={"yellow"}
+/*       style={({pressed}) => [
+        {
+          backgroundColor: pressed ? "red" : "blue",
+        },
+      ]} */
+      android_ripple={{color: "#00F"}}
+    //   delayLongPress={2000}
     >
       <View style={styles.items}>
         <Text style={styles.element}>{props.name}</Text>
       </View>
-    </TouchableHighlight>
+    </Pressable>
   );
 }
 
