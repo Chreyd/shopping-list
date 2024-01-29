@@ -7,7 +7,7 @@ import {
   Modal,
   Text,
   Pressable,
-  Button
+  Button,
 } from "react-native";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
@@ -18,16 +18,29 @@ export default function App() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [displayModal, setDisplayModal] = useState(false)
+  const [displayModal, setDisplayModal] = useState(false);
 
   const submitHandler = (product) => {
     const idString = Date.now().toString();
-    product.length > 1
+
+    setDisplayModal(false);
+
+/*     product.length > 1
       ? setMyProducts((currentMyProducts) => [
           { key: idString, name: product },
           ...currentMyProducts,
         ])
-      : setShowModal(true);
+      : setShowModal(true); */
+
+    if (product.length > 1) {
+      setMyProducts((currentMyProducts) => [
+        { key: idString, name: product },
+        ...currentMyProducts,
+      ]);
+    } else {
+
+      setShowModal(true);
+    }
   };
 
   /* animationType: fade ou slide */
@@ -68,7 +81,7 @@ export default function App() {
           </View>
         </Modal>
 
-        <Button title="Nouveau Produit" onPress={()=>setDisplayModal(true)} />
+        <Button title="Nouveau Produit" onPress={() => setDisplayModal(true)} />
 
         <AddProduct submitHandler={submitHandler} displayModal={displayModal} />
         <FlatList
@@ -90,7 +103,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 40,
     paddingTop: 60,
-    flex: 1
+    flex: 1,
   },
   inputContainer: {
     flexDirection: "row",

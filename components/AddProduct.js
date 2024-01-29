@@ -11,6 +11,7 @@ export default function AddProduct(props) {
   const handleClick = () => {
     props.submitHandler(product);
     setProduct("");
+    // props.setDisplayModal(false);
   };
 
   /* 
