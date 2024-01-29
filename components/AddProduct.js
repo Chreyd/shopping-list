@@ -14,6 +14,14 @@ export default function AddProduct(props) {
     setProduct("");
   };
 
+/* 
+      pour cette vidéo
+  multiline | maxLength | secureTextEntry | editable :dans TextInput
+
+*/
+
+
+
   return (
     <View>
       <View style={styles.inputContainer}>
@@ -23,6 +31,10 @@ export default function AddProduct(props) {
           // onChangeText={(e)=>inputHandler(e)}
           onChangeText={inputHandler}
           value={product}
+          // multiline
+          // maxLength={9}
+          // secureTextEntry
+          // editable={false}
         />
         <Button title="Valider" onPress={handleClick}  />
       </View>
@@ -32,7 +44,7 @@ export default function AddProduct(props) {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: "row",
+    // flexDirection: "row",
     marginVertical: 10,
   },
   textInput: {
@@ -42,5 +54,6 @@ const styles = StyleSheet.create({
     paddingLeft: 9,
     fontSize: 18,
     flexGrow: 1,
+    marginBottom: 9
   },
 });
