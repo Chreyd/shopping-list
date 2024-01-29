@@ -8,6 +8,7 @@ import {
   Text,
   Pressable,
   Button,
+  Image,
 } from "react-native";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
@@ -20,16 +21,16 @@ export default function App() {
 
   const [displayModal, setDisplayModal] = useState(false);
 
-  const cancelNewProduct=()=>{
-    setDisplayModal(false)
-  }
+  const cancelNewProduct = () => {
+    setDisplayModal(false);
+  };
 
   const submitHandler = (product) => {
     const idString = Date.now().toString();
 
     setDisplayModal(false);
 
-/*     product.length > 1
+    /*     product.length > 1
       ? setMyProducts((currentMyProducts) => [
           { key: idString, name: product },
           ...currentMyProducts,
@@ -42,7 +43,6 @@ export default function App() {
         ...currentMyProducts,
       ]);
     } else {
-
       setShowModal(true);
     }
   };
@@ -69,6 +69,8 @@ export default function App() {
                 <Text style={styles.modalHeaderText}>OUPS!</Text>
               </View>
               <View style={styles.modalBody}>
+                {/* <Image source={require("./assets/red-check-128px.png")} style={styles.redCheck}/> */}
+                <Image source={{uri : 'https://cdn.pixabay.com/photo/2013/07/12/12/40/abort-146072_640.png'}} style={styles.redCheck}/> 
                 <Text style={styles.modalBodyText}>
                   Merci d'indiquer plus d'un caractère
                 </Text>
@@ -87,7 +89,11 @@ export default function App() {
 
         <Button title="Nouveau Produit" onPress={() => setDisplayModal(true)} />
 
-        <AddProduct submitHandler={submitHandler} displayModal={displayModal} cancelNewProduct={cancelNewProduct} />
+        <AddProduct
+          submitHandler={submitHandler}
+          displayModal={displayModal}
+          cancelNewProduct={cancelNewProduct}
+        />
         <FlatList
           data={myProducts}
           renderItem={({ item }) => (
@@ -130,7 +136,7 @@ const styles = StyleSheet.create({
   modalContent: {
     backgroundColor: "#fff",
     width: "80%",
-    height: 250,
+    height: 270,
     borderRadius: 15,
     alignItems: "center",
   },
@@ -176,4 +182,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 16,
   },
+  redCheck:{
+    width: 100,
+    height: 100,
+  }
 });
