@@ -4,7 +4,6 @@ import React, { useState } from "react";
 export default function AddProduct(props) {
   const [product, setProduct] = useState("");
 
-
   const inputHandler = (val) => {
     setProduct(val);
   };
@@ -14,13 +13,11 @@ export default function AddProduct(props) {
     setProduct("");
   };
 
-/* 
+  /* 
       pour cette vidéo
   multiline | maxLength | secureTextEntry | editable :dans TextInput
 
 */
-
-
 
   return (
     <View>
@@ -36,7 +33,7 @@ export default function AddProduct(props) {
           // secureTextEntry
           // editable={false}
         />
-        <Button title="Valider" onPress={handleClick}  />
+        <Button title="Valider" onPress={handleClick} />
       </View>
     </View>
   );
@@ -54,6 +51,6 @@ const styles = StyleSheet.create({
     paddingLeft: 9,
     fontSize: 18,
     flexGrow: 1,
-    marginBottom: 9
+    marginBottom: 9,
   },
 });

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
+import DismissKeyboard from "./components/DismissKeyboard";
 
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
@@ -34,42 +35,49 @@ export default function App() {
     });
   };
   return (
-    <View style={styles.container}>
-      <Modal visible={showModal} onRequestClose={() => setShowModal(false)} animationType="slide" transparent>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalHeaderText}>OUPS!</Text>
-            </View>
-            <View style={styles.modalBody}>
-              <Text style={styles.modalBodyText}>
-                Merci d'indiquer plus d'un caractère
-              </Text>
-            </View>
-            <View style={styles.modalFooter}>
-              <Pressable
-                style={styles.pressableBtnModal}
-                onPress={() => setShowModal(false)}
-              >
-                <Text style={styles.modalBtnText}>OK</Text>
-              </Pressable>
+    <DismissKeyboard>
+      <View style={styles.container}>
+        <Modal
+          visible={showModal}
+          onRequestClose={() => setShowModal(false)}
+          animationType="slide"
+          transparent
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalHeaderText}>OUPS!</Text>
+              </View>
+              <View style={styles.modalBody}>
+                <Text style={styles.modalBodyText}>
+                  Merci d'indiquer plus d'un caractère
+                </Text>
+              </View>
+              <View style={styles.modalFooter}>
+                <Pressable
+                  style={styles.pressableBtnModal}
+                  onPress={() => setShowModal(false)}
+                >
+                  <Text style={styles.modalBtnText}>OK</Text>
+                </Pressable>
+              </View>
             </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
 
-      <AddProduct submitHandler={submitHandler} />
-      <FlatList
-        data={myProducts}
-        renderItem={({ item }) => (
-          <Products
-            name={item.name}
-            deleteProduct={deleteProduct}
-            keyProduct={item.key}
-          />
-        )}
-      />
-    </View>
+        <AddProduct submitHandler={submitHandler} />
+        <FlatList
+          data={myProducts}
+          renderItem={({ item }) => (
+            <Products
+              name={item.name}
+              deleteProduct={deleteProduct}
+              keyProduct={item.key}
+            />
+          )}
+        />
+      </View>
+    </DismissKeyboard>
   );
 }
 
@@ -77,6 +85,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 40,
     paddingTop: 60,
+    flex: 1
   },
   inputContainer: {
     flexDirection: "row",
