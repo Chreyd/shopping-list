@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Modal } from "react-native";
 import React, { useState } from "react";
 
 export default function AddProduct(props) {
@@ -20,7 +20,11 @@ export default function AddProduct(props) {
 */
 
   return (
-    <View>
+    <Modal
+    visible={props.displayModal}
+    animationType="slide"
+
+    >
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
@@ -35,14 +39,18 @@ export default function AddProduct(props) {
         />
         <Button title="Valider" onPress={handleClick} />
       </View>
-    </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   inputContainer: {
     // flexDirection: "row",
-    marginVertical: 10,
+    // marginVertical: 10,
+    // backgroundColor: "red",
+    flex: 1,
+    justifyContent: 'center',
+    padding: 24,
   },
   textInput: {
     borderWidth: 1,
@@ -50,7 +58,7 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingLeft: 9,
     fontSize: 18,
-    flexGrow: 1,
+    // flexGrow: 1,
     marginBottom: 9,
   },
 });
