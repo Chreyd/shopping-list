@@ -9,6 +9,7 @@ import {
   Pressable,
   Button,
   Image,
+  ImageBackground,
 } from "react-native";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
@@ -56,7 +57,13 @@ export default function App() {
   };
   return (
     <DismissKeyboard>
-      <View style={styles.container}>
+      <ImageBackground
+        style={styles.container}
+        source={{
+          uri: "https://cdn.pixabay.com/photo/2023/01/04/13/45/flowers-7696757_640.png",
+        }}
+        // source={require('./assets/flower-7829456_1920.png')}
+      >
         <Modal
           visible={showModal}
           onRequestClose={() => setShowModal(false)}
@@ -70,7 +77,12 @@ export default function App() {
               </View>
               <View style={styles.modalBody}>
                 {/* <Image source={require("./assets/red-check-128px.png")} style={styles.redCheck}/> */}
-                <Image source={{uri : 'https://cdn.pixabay.com/photo/2013/07/12/12/40/abort-146072_640.png'}} style={styles.redCheck}/> 
+                <Image
+                  source={{
+                    uri: "https://cdn.pixabay.com/photo/2013/07/12/12/40/abort-146072_640.png",
+                  }}
+                  style={styles.redCheck}
+                />
                 <Text style={styles.modalBodyText}>
                   Merci d'indiquer plus d'un caractère
                 </Text>
@@ -104,7 +116,7 @@ export default function App() {
             />
           )}
         />
-      </View>
+      </ImageBackground>
     </DismissKeyboard>
   );
 }
@@ -182,8 +194,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 16,
   },
-  redCheck:{
+  redCheck: {
     width: 100,
     height: 100,
-  }
+  },
 });

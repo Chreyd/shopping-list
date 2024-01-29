@@ -35,11 +35,12 @@ const styles = StyleSheet.create({
     flexGrow:1
   },
   element: {
-    backgroundColor: "#00ffff",
+    backgroundColor: "mediumseagreen",
     marginVertical: 5,
     padding: 20,
     fontSize: 17,
     marginRight: 5,
+    color:'#fff'
   },
 
 });
