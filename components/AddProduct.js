@@ -38,7 +38,8 @@ export default function AddProduct(props) {
           // secureTextEntry
           // editable={false}
         />
-        <Button title="Valider" onPress={handleClick} />
+        <Button title="Valider" onPress={handleClick}  />
+        <Button title="Annuler" onPress={()=>props.cancelNewProduct()} color="red"/>
       </View>
     </Modal>
   );

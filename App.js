@@ -20,6 +20,10 @@ export default function App() {
 
   const [displayModal, setDisplayModal] = useState(false);
 
+  const cancelNewProduct=()=>{
+    setDisplayModal(false)
+  }
+
   const submitHandler = (product) => {
     const idString = Date.now().toString();
 
@@ -83,7 +87,7 @@ export default function App() {
 
         <Button title="Nouveau Produit" onPress={() => setDisplayModal(true)} />
 
-        <AddProduct submitHandler={submitHandler} displayModal={displayModal} />
+        <AddProduct submitHandler={submitHandler} displayModal={displayModal} cancelNewProduct={cancelNewProduct} />
         <FlatList
           data={myProducts}
           renderItem={({ item }) => (
