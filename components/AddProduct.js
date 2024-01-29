@@ -21,11 +21,7 @@ export default function AddProduct(props) {
 */
 
   return (
-    <Modal
-    visible={props.displayModal}
-    animationType="slide"
-
-    >
+    <Modal visible={props.displayModal} animationType="slide">
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
@@ -38,8 +34,18 @@ export default function AddProduct(props) {
           // secureTextEntry
           // editable={false}
         />
-        <Button title="Valider" onPress={handleClick}  />
-        <Button title="Annuler" onPress={()=>props.cancelNewProduct()} color="red"/>
+        <View style={styles.btnContainer}>
+          <View style={styles.btnBlue}>
+            <Button title="Valider" onPress={handleClick} />
+          </View>
+          <View style={styles.btnTomato}>
+            <Button
+              title="Annuler"
+              onPress={() => props.cancelNewProduct()}
+              color="tomato"
+            />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -51,7 +57,7 @@ const styles = StyleSheet.create({
     // marginVertical: 10,
     // backgroundColor: "red",
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 24,
   },
   textInput: {
@@ -62,5 +68,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     // flexGrow: 1,
     marginBottom: 9,
+  },
+  btnContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  btnBlue:{
+    width: '45%'
+  },
+  btnTomato:{
+    width: '45%'
   },
 });
