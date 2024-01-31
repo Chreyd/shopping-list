@@ -25,6 +25,7 @@ export default function AddProduct(props) {
           // onChangeHandler={(e)=>inputHandler(e)}
           onChangeHandler={inputHandler}
           inputValue={product}
+          maxLength={10}
         />
         <View style={styles.btnContainer}>
           <ButtonComponent onPressHandler={handleClick} style={styles.btnBlue}>
