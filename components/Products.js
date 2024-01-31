@@ -12,7 +12,7 @@ import TrashCan from "./TrashCan";
 
 export default function Products(props) {
   return (
-    <View style={styles.products} >
+    <View style={styles.products}>
       <View style={styles.items}>
         <Text style={styles.element}>{props.name}</Text>
       </View>
@@ -26,21 +26,21 @@ export default function Products(props) {
 }
 
 const styles = StyleSheet.create({
-    products:{
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
+  products: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   items: {
     marginVertical: 5,
-    flexGrow:1
+    flexGrow: 1,
+    backgroundColor: "mediumseagreen",
+    borderRadius: 6,
   },
   element: {
-    backgroundColor: "mediumseagreen",
     marginVertical: 5,
     padding: 20,
     fontSize: 17,
     marginRight: 5,
-    color:'#fff'
+    color: "#fff",
   },
-
 });
