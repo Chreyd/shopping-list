@@ -26,16 +26,15 @@ export default function AddProduct(props) {
           value={product}
         />
         <View style={styles.btnContainer}>
+          <ButtonComponent onPressHandler={handleClick} style={styles.btnBlue}>
+            Valider
+          </ButtonComponent>
           <ButtonComponent
-            btnTitle="Valider"
-            onPressHandler={handleClick}
-            style={styles.btnBlue}
-          />
-          <ButtonComponent
-            btnTitle="Annuler"
             onPressHandler={() => props.cancelNewProduct()}
             style={styles.btnTomato}
-          />
+          >
+            Annuler
+          </ButtonComponent>
         </View>
       </View>
     </Modal>
@@ -67,12 +66,11 @@ const styles = StyleSheet.create({
   btnBlue: {
     backgroundColor: "seagreen",
     width: 150,
-    borderRadius: 6
-
+    borderRadius: 6,
   },
   btnTomato: {
     backgroundColor: "tomato",
     width: 150,
-    borderRadius: 6
+    borderRadius: 6,
   },
 });

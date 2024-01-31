@@ -14,6 +14,7 @@ import {
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 import DismissKeyboard from "./components/DismissKeyboard";
+import ButtonComponent from "./components/ButtonComponent";
 
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
@@ -99,8 +100,10 @@ export default function App() {
           </View>
         </Modal>
 
-        <Button title="Nouveau Produit" onPress={() => setDisplayModal(true)} />
-
+        {/* <Button title="Nouveau Produit" onPress={() => setDisplayModal(true)} /> */}
+        <ButtonComponent onPressHandler={() => setDisplayModal(true)} style={styles.addProductBtn} >
+          Nouveau Produit
+        </ButtonComponent>
         <AddProduct
           submitHandler={submitHandler}
           displayModal={displayModal}
@@ -198,4 +201,12 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
+  addProductBtn:{
+    backgroundColor: "#7b1f04",
+    padding: 20,
+    borderRadius: 50,
+    borderWidth: 3,
+    borderColor: "#fff"
+
+  }
 });
