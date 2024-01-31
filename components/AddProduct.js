@@ -7,7 +7,12 @@ export default function AddProduct(props) {
   const [product, setProduct] = useState("");
 
   const inputHandler = (val) => {
-    setProduct(val);
+
+    const regex= /[^a-z]/gi;
+    // const regex= /[^0-9]/gi;
+    setProduct(val.replace(regex, ''));
+    // setProduct(val);
+
   };
 
   const handleClick = () => {
@@ -25,7 +30,9 @@ export default function AddProduct(props) {
           // onChangeHandler={(e)=>inputHandler(e)}
           onChangeHandler={inputHandler}
           inputValue={product}
-          maxLength={10}
+          // maxLength={10}
+          // keyboardType='number-pad'
+
         />
         <View style={styles.btnContainer}>
           <ButtonComponent onPressHandler={handleClick} style={styles.btnBlue}>
