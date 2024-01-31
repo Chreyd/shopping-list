@@ -1,21 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   View,
   FlatList,
-  Alert,
   Modal,
   Text,
   Pressable,
   Image,
   ImageBackground,
 } from "react-native";
+import * as Font from "expo-font";
+//npm install --save expo-font
+//https://fonts.google.com/
+// import AppLoading from "expo-app-loading";
+//expo install expo-app-loading
+
+import * as SplashScreen from "expo-splash-screen";
+//npx expo install expo-splash-screen
+
+SplashScreen.preventAutoHideAsync();
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    "inter-bold": require("./assets/fonts/Inter-Bold.ttf"),
+    "inter-regular": require("./assets/fonts/Inter-Regular.ttf"),
+  });
+};
+
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 import DismissKeyboard from "./components/DismissKeyboard";
 import ButtonComponent from "./components/ButtonComponent";
 import Header from "./components/Header";
-import Color from "./constants/colors"
+import Color from "./constants/colors";
 
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
@@ -23,6 +40,59 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
 
   const [displayModal, setDisplayModal] = useState(false);
+
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Pre-load fonts, make any API calls you need to do here
+        await Font.loadAsync({
+          "inter-bold": require("./assets/fonts/Inter-Bold.ttf"),
+          "inter-regular": require("./assets/fonts/Inter-Regular.ttf"),
+          "Pacifico-Regular": require("./assets/fonts/Pacifico-Regular.ttf")
+        });
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null
+    // return (
+    //   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    //     {/* Placeholder image while loading */}
+    //     <Image
+    //       source={require("./assets/flower-7829456_1920.png")}
+    //       style={{ width: 100, height: 100 }}
+    //     />
+    //   </View>
+    // );
+  }
+
+  /*   const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  if (!fontsLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setFontsLoaded(true)}
+        onError={(error) => console.log(error)}
+      />
+    );
+  } */
 
   const cancelNewProduct = () => {
     setDisplayModal(false);
@@ -33,13 +103,6 @@ export default function App() {
 
     setDisplayModal(false);
 
-    /*     product.length > 1
-      ? setMyProducts((currentMyProducts) => [
-          { key: idString, name: product },
-          ...currentMyProducts,
-        ])
-      : setShowModal(true); */
-
     if (product.length > 1) {
       setMyProducts((currentMyProducts) => [
         { key: idString, name: product },
@@ -49,8 +112,6 @@ export default function App() {
       setShowModal(true);
     }
   };
-
-  /* animationType: fade ou slide */
 
   const deleteProduct = (key) => {
     setMyProducts((currentMyProducts) => {
@@ -67,7 +128,7 @@ export default function App() {
         // source={require('./assets/flower-7829456_1920.png')}
       >
         <Header />
-        <View style={styles.container}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
           <Modal
             visible={showModal}
             onRequestClose={() => setShowModal(false)}
@@ -192,13 +253,13 @@ const styles = StyleSheet.create({
   },
   pressableBtnModal: {
     // padding: 10,
-    backgroundColor:  Color.info,
+    backgroundColor: Color.info,
     borderBottomRightRadius: 15,
     borderBottomLeftRadius: 15,
     // alignItems:'center'
   },
   modalBtnText: {
-    color:  Color.white,
+    color: Color.white,
     fontSize: 17,
     textAlign: "center",
     padding: 16,
@@ -208,7 +269,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   addProductBtn: {
-    backgroundColor:  Color.danger,
+    backgroundColor: Color.danger,
     padding: 20,
     borderRadius: 50,
     borderWidth: 3,
