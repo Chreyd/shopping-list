@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, Button, Modal } from "react-native";
 import React, { useState } from "react";
 import ButtonComponent from "./ButtonComponent";
+import Input from "./Input";
 
 export default function AddProduct(props) {
   const [product, setProduct] = useState("");
@@ -18,12 +19,12 @@ export default function AddProduct(props) {
   return (
     <Modal visible={props.displayModal} animationType="slide">
       <View style={styles.inputContainer}>
-        <TextInput
+        <Input
           style={styles.textInput}
-          placeholder="Nouveau Produit"
-          // onChangeText={(e)=>inputHandler(e)}
-          onChangeText={inputHandler}
-          value={product}
+          textPlaceholder="Nouveau Produit"
+          // onChangeHandler={(e)=>inputHandler(e)}
+          onChangeHandler={inputHandler}
+          inputValue={product}
         />
         <View style={styles.btnContainer}>
           <ButtonComponent onPressHandler={handleClick} style={styles.btnBlue}>
@@ -51,13 +52,12 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   textInput: {
-    borderWidth: 1,
-    borderColor: "grey",
     padding: 5,
-    paddingLeft: 9,
     fontSize: 18,
-    // flexGrow: 1,
-    marginBottom: 9,
+    textAlign: "center",
+    borderRadius: 30,
+    height: 50,
+    marginBottom: 15,
   },
   btnContainer: {
     flexDirection: "row",
