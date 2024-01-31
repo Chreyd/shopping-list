@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TextInput, Button, Modal } from "react-native";
 import React, { useState } from "react";
+import ButtonComponent from "./ButtonComponent";
 
 export default function AddProduct(props) {
   const [product, setProduct] = useState("");
@@ -14,12 +15,6 @@ export default function AddProduct(props) {
     // props.setDisplayModal(false);
   };
 
-  /* 
-      pour cette vidéo
-  multiline | maxLength | secureTextEntry | editable :dans TextInput
-
-*/
-
   return (
     <Modal visible={props.displayModal} animationType="slide">
       <View style={styles.inputContainer}>
@@ -29,22 +24,18 @@ export default function AddProduct(props) {
           // onChangeText={(e)=>inputHandler(e)}
           onChangeText={inputHandler}
           value={product}
-          // multiline
-          // maxLength={9}
-          // secureTextEntry
-          // editable={false}
         />
         <View style={styles.btnContainer}>
-          <View style={styles.btnBlue}>
-            <Button title="Valider" onPress={handleClick} />
-          </View>
-          <View style={styles.btnTomato}>
-            <Button
-              title="Annuler"
-              onPress={() => props.cancelNewProduct()}
-              color="tomato"
-            />
-          </View>
+          <ButtonComponent
+            btnTitle="Valider"
+            onPressHandler={handleClick}
+            style={styles.btnBlue}
+          />
+          <ButtonComponent
+            btnTitle="Annuler"
+            onPressHandler={() => props.cancelNewProduct()}
+            style={styles.btnTomato}
+          />
         </View>
       </View>
     </Modal>
@@ -73,10 +64,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  btnBlue:{
-    width: '45%'
+  btnBlue: {
+    backgroundColor: "seagreen",
+    width: 150,
+    borderRadius: 6
+
   },
-  btnTomato:{
-    width: '45%'
+  btnTomato: {
+    backgroundColor: "tomato",
+    width: 150,
+    borderRadius: 6
   },
 });
