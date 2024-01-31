@@ -7,7 +7,6 @@ import {
   Modal,
   Text,
   Pressable,
-  Button,
   Image,
   ImageBackground,
 } from "react-native";
@@ -15,6 +14,7 @@ import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 import DismissKeyboard from "./components/DismissKeyboard";
 import ButtonComponent from "./components/ButtonComponent";
+import Header from "./components/Header";
 
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
@@ -59,66 +59,72 @@ export default function App() {
   return (
     <DismissKeyboard>
       <ImageBackground
-        style={styles.container}
+        style={styles.bgImage}
         source={{
           uri: "https://cdn.pixabay.com/photo/2023/01/04/13/45/flowers-7696757_640.png",
         }}
         // source={require('./assets/flower-7829456_1920.png')}
       >
-        <Modal
-          visible={showModal}
-          onRequestClose={() => setShowModal(false)}
-          animationType="slide"
-          transparent
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <View style={styles.modalHeader}>
-                <Text style={styles.modalHeaderText}>OUPS!</Text>
-              </View>
-              <View style={styles.modalBody}>
-                {/* <Image source={require("./assets/red-check-128px.png")} style={styles.redCheck}/> */}
-                <Image
-                  source={{
-                    uri: "https://cdn.pixabay.com/photo/2013/07/12/12/40/abort-146072_640.png",
-                  }}
-                  style={styles.redCheck}
-                />
-                <Text style={styles.modalBodyText}>
-                  Merci d'indiquer plus d'un caractère
-                </Text>
-              </View>
-              <View style={styles.modalFooter}>
-                <Pressable
-                  style={styles.pressableBtnModal}
-                  onPress={() => setShowModal(false)}
-                >
-                  <Text style={styles.modalBtnText}>OK</Text>
-                </Pressable>
+        <Header />
+        <View style={styles.container}>
+          <Modal
+            visible={showModal}
+            onRequestClose={() => setShowModal(false)}
+            animationType="slide"
+            transparent
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <View style={styles.modalHeader}>
+                  <Text style={styles.modalHeaderText}>OUPS!</Text>
+                </View>
+                <View style={styles.modalBody}>
+                  {/* <Image source={require("./assets/red-check-128px.png")} style={styles.redCheck}/> */}
+                  <Image
+                    source={{
+                      uri: "https://cdn.pixabay.com/photo/2013/07/12/12/40/abort-146072_640.png",
+                    }}
+                    style={styles.redCheck}
+                  />
+                  <Text style={styles.modalBodyText}>
+                    Merci d'indiquer plus d'un caractère
+                  </Text>
+                </View>
+                <View style={styles.modalFooter}>
+                  <Pressable
+                    style={styles.pressableBtnModal}
+                    onPress={() => setShowModal(false)}
+                  >
+                    <Text style={styles.modalBtnText}>OK</Text>
+                  </Pressable>
+                </View>
               </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
 
-        {/* <Button title="Nouveau Produit" onPress={() => setDisplayModal(true)} /> */}
-        <ButtonComponent onPressHandler={() => setDisplayModal(true)} style={styles.addProductBtn} >
-          Nouveau Produit
-        </ButtonComponent>
-        <AddProduct
-          submitHandler={submitHandler}
-          displayModal={displayModal}
-          cancelNewProduct={cancelNewProduct}
-        />
-        <FlatList
-          data={myProducts}
-          renderItem={({ item }) => (
-            <Products
-              name={item.name}
-              deleteProduct={deleteProduct}
-              keyProduct={item.key}
-            />
-          )}
-        />
+          {/* <Button title="Nouveau Produit" onPress={() => setDisplayModal(true)} /> */}
+          <ButtonComponent
+            onPressHandler={() => setDisplayModal(true)}
+            style={styles.addProductBtn}
+          >
+            Nouveau Produit
+          </ButtonComponent>
+          <AddProduct
+            submitHandler={submitHandler}
+            displayModal={displayModal}
+            cancelNewProduct={cancelNewProduct}
+          />
+          <FlatList
+            data={myProducts}
+            renderItem={({ item }) => (
+              <Products
+                name={item.name}
+                deleteProduct={deleteProduct}
+                keyProduct={item.key}
+              />
+            )}
+          />
+        </View>
       </ImageBackground>
     </DismissKeyboard>
   );
@@ -127,7 +133,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     padding: 40,
-    paddingTop: 60,
     flex: 1,
   },
   inputContainer: {
@@ -201,12 +206,15 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-  addProductBtn:{
+  addProductBtn: {
     backgroundColor: "#7b1f04",
     padding: 20,
     borderRadius: 50,
     borderWidth: 3,
-    borderColor: "#fff"
-
-  }
+    borderColor: "#fff",
+    marginBottom: 10,
+  },
+  bgImage: {
+    flex: 1,
+  },
 });
