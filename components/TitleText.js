@@ -11,7 +11,7 @@ export default TitleText
 
 const styles = StyleSheet.create({
     text:{
-        fontSize:30,
-        padding:9
+        // fontSize:30,
+        // padding:9
     }
 })

@@ -99,7 +99,7 @@ export default function App() {
   } */
 
   const [fontsLoaded, fontError] = useFonts({
-    Bangers_400Regular: Bangers_400Regular,
+    BangersRegular: Bangers_400Regular,
     "inter-bold": require("./assets/fonts/Inter-Bold.ttf"),
     "inter-regular": require("./assets/fonts/Inter-Regular.ttf"),
     "Pacifico-Regular": require("./assets/fonts/Pacifico-Regular.ttf"),

@@ -2,6 +2,9 @@ import { StyleSheet, Text, View, TextInput, Button, Modal } from "react-native";
 import React, { useState } from "react";
 import ButtonComponent from "./ButtonComponent";
 import Input from "./Input";
+import BodyText from "./BodyText";
+import AppStyles from "../constants/AppStyles";
+import TitleText from "./TitleText"
 
 export default function AddProduct(props) {
   const [product, setProduct] = useState("");
@@ -24,6 +27,10 @@ export default function AddProduct(props) {
   return (
     <Modal visible={props.displayModal} animationType="slide">
       <View style={styles.inputContainer}>
+
+      <TitleText style={AppStyles.headerTwo} >Veuillez indiquer un produit</TitleText>
+      <BodyText >You can import any font style from any Expo Google Fonts package from it. It will load the fonts over the network at runtime instead of adding the asset as a file to your project, so it may take longer for your app to get to interactivity at startup, but it is extremely convenient for playing around with any style that you want.</BodyText>
+
         <Input
           style={styles.textInput}
           textPlaceholder="Nouveau Produit"
