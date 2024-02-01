@@ -9,6 +9,7 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
+
 import * as Font from "expo-font";
 
 //npm install --save expo-font

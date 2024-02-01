@@ -9,6 +9,9 @@ import {
 } from "react-native";
 import React from "react";
 import TrashCan from "./TrashCan";
+import {FontAwesome} from '@expo/vector-icons';
+import colors from "../constants/colors";
+
 
 export default function Products(props) {
   return (
@@ -18,7 +21,8 @@ export default function Products(props) {
       </View>
       <Pressable onPress={() => props.deleteProduct(props.keyProduct)}>
         <View>
-          <TrashCan />
+          {/* <TrashCan /> */}
+          <FontAwesome name ="remove" size={50} color={colors.warning}/>
         </View>
       </Pressable>
     </View>
