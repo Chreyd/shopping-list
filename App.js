@@ -10,6 +10,7 @@ import {
   ImageBackground,
 } from "react-native";
 import * as Font from "expo-font";
+
 //npm install --save expo-font
 //https://fonts.google.com/
 // import AppLoading from "expo-app-loading";
@@ -20,12 +21,14 @@ import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 
-const fetchFonts = () => {
+import { useFonts, Bangers_400Regular } from "@expo-google-fonts/bangers";
+
+/* const fetchFonts = () => {
   return Font.loadAsync({
     "inter-bold": require("./assets/fonts/Inter-Bold.ttf"),
     "inter-regular": require("./assets/fonts/Inter-Regular.ttf"),
   });
-};
+}; */
 
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
@@ -43,44 +46,44 @@ export default function App() {
 
   const [appIsReady, setAppIsReady] = useState(false);
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        // Pre-load fonts, make any API calls you need to do here
-        await Font.loadAsync({
-          "inter-bold": require("./assets/fonts/Inter-Bold.ttf"),
-          "inter-regular": require("./assets/fonts/Inter-Regular.ttf"),
-          "Pacifico-Regular": require("./assets/fonts/Pacifico-Regular.ttf")
-        });
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
+  // useEffect(() => {
+  //   async function prepare() {
+  //     try {
+  //       // Pre-load fonts, make any API calls you need to do here
+  //       await Font.loadAsync({
+  //         "inter-bold": require("./assets/fonts/Inter-Bold.ttf"),
+  //         "inter-regular": require("./assets/fonts/Inter-Regular.ttf"),
+  //         "Pacifico-Regular": require("./assets/fonts/Pacifico-Regular.ttf")
+  //       });
+  //       await new Promise((resolve) => setTimeout(resolve, 5000));
+  //     } catch (e) {
+  //       console.warn(e);
+  //     } finally {
+  //       setAppIsReady(true);
+  //     }
+  //   }
 
-    prepare();
-  }, []);
+  //   prepare();
+  // }, []);
 
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (appIsReady) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [appIsReady]);
 
-  if (!appIsReady) {
-    return null
-    // return (
-    //   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    //     {/* Placeholder image while loading */}
-    //     <Image
-    //       source={require("./assets/flower-7829456_1920.png")}
-    //       style={{ width: 100, height: 100 }}
-    //     />
-    //   </View>
-    // );
-  }
+  // if (!appIsReady) {
+  //   return null
+  //   // return (
+  //   //   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+  //   //     {/* Placeholder image while loading */}
+  //   //     <Image
+  //   //       source={require("./assets/flower-7829456_1920.png")}
+  //   //       style={{ width: 100, height: 100 }}
+  //   //     />
+  //   //   </View>
+  //   // );
+  // }
 
   /*   const [fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -93,6 +96,23 @@ export default function App() {
       />
     );
   } */
+
+  const [fontsLoaded, fontError] = useFonts({
+    Bangers_400Regular: Bangers_400Regular,
+    "inter-bold": require("./assets/fonts/Inter-Bold.ttf"),
+    "inter-regular": require("./assets/fonts/Inter-Regular.ttf"),
+    "Pacifico-Regular": require("./assets/fonts/Pacifico-Regular.ttf"),
+  });
+
+  const onLayoutRootView2 = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
 
   const cancelNewProduct = () => {
     setDisplayModal(false);
@@ -128,7 +148,7 @@ export default function App() {
         // source={require('./assets/flower-7829456_1920.png')}
       >
         <Header />
-        <View style={styles.container} onLayout={onLayoutRootView}>
+        <View style={styles.container} onLayout={onLayoutRootView2}>
           <Modal
             visible={showModal}
             onRequestClose={() => setShowModal(false)}

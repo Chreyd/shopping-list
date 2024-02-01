@@ -22,8 +22,9 @@ const styles = StyleSheet.create({
     color:"#fff",
     fontSize: 30,
     padding: 9,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     // fontFamily: 'inter-regular',
-    fontFamily: 'Pacifico-Regular',
+    // fontFamily: 'Pacifico-Regular',
+    fontFamily: 'Bangers_400Regular',
   }
 });
